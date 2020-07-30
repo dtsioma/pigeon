@@ -1,0 +1,33 @@
+.Button {
+  padding: 10px 40px;
+  font-family: inherit;
+  font-size: 20px;
+  border: 2px solid;
+  /* background-color: white; */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.Black {
+  border-color: black;
+  background-color: black;
+  color: white;
+}
+.Black:hover {
+  background-color: white;
+  color: black;
+}
+
+.BlackInverted {
+  border-color: black;
+  background-color: white;
+  color: black;
+}
+.BlackInverted:hover {
+  background-color: black;
+  color: white;
+}
+
+.FullWidth {
+  width: 100%;
+}

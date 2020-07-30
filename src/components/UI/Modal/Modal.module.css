@@ -1,0 +1,25 @@
+.Modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  position: fixed;
+  width: 300px;
+  top: 30%;
+  left: calc(50% - 150px);
+  min-height: 100px;
+  z-index: 500;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px black;
+  padding: 50px 20px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.Text {
+  text-align: center;
+  line-height: 1.5;
+  font-size: 16px;
+}

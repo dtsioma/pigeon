@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
-function App() {
+import { Switch, Route } from 'react-router-dom';
+import Home from './components/Home/Home';
+import Main from './components/Main/Main';
+import Modal from './components/UI/Modal/Modal';
+import * as actions from './store/actions';
+
+const App = (props) => {
+  const { onAutoLogin } = props;
+
+  useEffect(() => {
+    onAutoLogin();
+  }, [onAutoLogin]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route path="/" component={props.isLoggedIn ? Main : Home} />
+    </Switch>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.userId !== null,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAutoLogin: () => dispatch(actions.autoLogin())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

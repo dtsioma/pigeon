@@ -1,0 +1,13 @@
+.HomeContent {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.Signup {
+  margin-top: 20px;
+}
+
+.SignupLink {
+  color: black;
+}
