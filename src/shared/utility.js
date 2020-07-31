@@ -14,7 +14,7 @@ export const checkValidity = (value, rules) => {
   }
 
   if (rules.isEmail) {
-    const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const pattern = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     isValid = pattern.test(value) && isValid;
   }
 
@@ -30,4 +30,18 @@ export const showErrorMessage = (message) => {
     case 'TOO_MANY_ATTEMPTS_TRY_LATER': return 'All requests from this device are temporarily blocked due to unusual activity. Try again later.';
     default: return message;
   }
+}
+
+export const deepCopy = (inputObj) => {
+  let outputObj, value, key;
+  if (typeof inputObj !== 'object' || inputObj === null) {
+    return inputObj
+  }
+  outputObj = Array.isArray(inputObj) ? [] : {};
+  for (key in inputObj) {
+    value = inputObj[key];
+
+    outputObj[key] = deepCopy(value);
+  }
+  return outputObj;
 }

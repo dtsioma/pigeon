@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
 import { checkValidity } from '../../../shared/utility';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
-import axios from '../../../axios-instance';
 
 import classes from './Form.module.css';
 // import Input from './Input/Input';
 import Button from '../Button/Button';
 
 const Form = (props) => {
-  const [formControls, setFormControls] = useState(props.config.controls);
-  const [formIsValid, setFormIsValid] = useState(false);
+  const configControls = props.config.controls;
+  
+  const [formControls, setFormControls] = useState(configControls);
   const [formIsDirty, setFormIsDirty] = useState(false);
+
+  useEffect(() => {
+    console.log('changed config controls', configControls);
+    setFormControls(configControls);
+  }, [configControls]);
 
   const inputChangeHandler = (event, ctrlKey) => {
     let activeControl = formControls[ctrlKey];
-    activeControl.value = event.target.value;
     activeControl = {
       ...activeControl,
       value: event.target.value,
@@ -42,21 +46,29 @@ const Form = (props) => {
       setFormIsDirty(true);
       return;
     }
-    
-    const user = {
-      email: formControls.username.value,
-      password: formControls.password.value
-    }
+
+    let user = null;
+  
     switch (props.config.action) {
       case 'login':
-        props.onLogin(user); break;
+        user = {
+          email: formControls.email.value,
+          password: formControls.password.value
+        }
+        props.onLogin(user);
+        break;
       case 'signup':
+        user = {
+          email: formControls.email.value,
+          username: formControls.username.value,
+          password: formControls.password.value
+        }
         props.onSignup(user); break;
       default: throw new Error('Unexpected form action:', props.config.action);
     }
   }
 
-  const formContent = Object.keys(formControls).map(ctrlKey => {
+  let formContent = Object.keys(formControls).map(ctrlKey => {
     const control = formControls[ctrlKey];
     const Cmp = control.component;
     return (
@@ -77,7 +89,7 @@ const Form = (props) => {
   );
 
   return (
-    <form className={classes.Form} onSubmit={(event) => submitHandler(event, {email: formControls.username.value, password: formControls.password.value})}>
+    <form className={classes.Form} onSubmit={submitHandler}>
       {formContent}
       {formButton}
     </form>
@@ -87,7 +99,9 @@ const Form = (props) => {
 const mapStateToProps = (state) => {
   return {
     loading: state.loading,
-    error: state.error
+    error: state.error,
+    isLoggedIn: state.userId !== null,
+    userId: state.userId
   }
 }
 

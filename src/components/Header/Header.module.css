@@ -1,0 +1,11 @@
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.1);
+}
+
+.Username {
+  font-size: 20px;
+}

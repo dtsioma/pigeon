@@ -11,12 +11,12 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_INIT:
       return {
-        ...initialState,
+        ...state,
         loading: true
       }
     case actionTypes.SET_ERROR:
       return {
-        ...initialState,
+        ...state,
         error: action.error
       }
     case actionTypes.SET_USERDATA: {

@@ -3,3 +3,9 @@
   flex-flow: column;
   align-items: center;
 }
+
+.BottomLink {
+  color: black;
+  font-size: 18px;
+  margin-top: 20px;
+}

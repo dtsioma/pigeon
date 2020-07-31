@@ -14,9 +14,9 @@ const Home = (props) => {
       {props.error ? <p>error</p> : null} */}
       <Title>Start messaging now.</Title>
       <Switch>
-        <Route path="/" exact component={HomeContent} />
         <Route path="/login" exact component={Auth} />
         <Route path="/create-account" exact component={Auth} />
+        <Route path="/" component={HomeContent} />
       </Switch>
     </div>
   );

@@ -1,23 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Fragment } from 'react';
 
-import Button from '../UI/Button/Button';
-import * as actions from '../../store/actions';
+import Header from '../Header/Header';
 
 
 const Main = (props) => {
+
   return (
-    <div>
-      You are logged in
-      <Button color="Black" clicked={props.onLogout}>Logout</Button>
-    </div>
+    <Fragment>
+      <Header />
+    </Fragment>
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onLogout: () => dispatch(actions.logout())
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Main);
+export default Main;

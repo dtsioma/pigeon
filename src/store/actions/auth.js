@@ -33,7 +33,8 @@ export const signup = (user) => {
   return {
     type: actionTypes.SIGNUP_USER,
     email: user.email,
-    password: user.password
+    password: user.password,
+    username: user.username
   }
 }
 
