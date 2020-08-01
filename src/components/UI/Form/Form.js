@@ -15,7 +15,6 @@ const Form = (props) => {
   const [formIsDirty, setFormIsDirty] = useState(false);
 
   useEffect(() => {
-    console.log('changed config controls', configControls);
     setFormControls(configControls);
   }, [configControls]);
 

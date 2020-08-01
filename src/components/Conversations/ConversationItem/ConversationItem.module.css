@@ -1,0 +1,20 @@
+.ConversationItem {
+  display: flex;
+  flex-flow: column;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.Username {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: black;
+  text-decoration: none;
+}
+
+.LastMessage {
+  color: black;
+  text-decoration: none;
+}

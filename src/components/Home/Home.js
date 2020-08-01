@@ -10,8 +10,6 @@ import Title from '../UI/Text/Title/Title';
 const Home = (props) => {
   return (
     <div className={classes.Home}>
-      {/* {props.loading ? <p>loading...</p> : null}
-      {props.error ? <p>error</p> : null} */}
       <Title>Start messaging now.</Title>
       <Switch>
         <Route path="/login" exact component={Auth} />
