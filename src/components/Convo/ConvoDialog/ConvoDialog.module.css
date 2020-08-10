@@ -1,6 +1,6 @@
-.Convo {
+.ConvoDialog {
   display: flex;
   flex-flow: column;
   justify-content: flex-end;
-  height: calc(100vh - 87px);
+  padding: 20px;
 }

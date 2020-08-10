@@ -22,13 +22,14 @@ export function* loginSaga(action) {
     yield localStorage.setItem('token', response.data.idToken);
     yield localStorage.setItem('expirationDate', expirationDate);
     yield put(actions.loginSuccess(response.data.localId, response.data.idToken));
-    yield put(browserHistory.push('/'));
+    yield browserHistory.push('/');
   } catch (err) {
-    yield put(actions.loginFail(err));
+    yield put(actions.loginFailed(err));
   }
 }
 
 export function* autoLoginSaga(action) {
+  yield put(actions.loginInit());
   const token = localStorage.getItem('token');
 
   if (!token) {
@@ -49,6 +50,7 @@ export function* logoutSaga(action) {
   yield localStorage.removeItem('userId');
   yield localStorage.removeItem('expirationDate');
   yield put(actions.logoutSuccess());
+  yield browserHistory.push('/');
 }
 
 export function* signupSaga(action) {
@@ -77,12 +79,21 @@ export function* signupSaga(action) {
       yield put(actions.signupSuccess(response.data.localId, response.data.idToken));
       yield console.log(res);
     } catch (error) {
-      yield put(actions.signupFail(error));
+      yield put(actions.signupFailed(error));
       yield console.log('Error');
     }
     
   } catch (err) {
-    yield put(actions.signupFail(err));
+    yield put(actions.signupFailed(err));
   }
 
+}
+
+export function* fetchUsernameSaga(action) {
+  try {
+    const response = yield axios.get(`https://pigeon-e9149.firebaseio.com/users/${action.userId}.json`);
+    yield put(actions.setUsername(response.data.username));
+  } catch (err) {
+    yield console.log(err);
+  }
 }

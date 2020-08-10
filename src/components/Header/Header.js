@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -7,28 +7,18 @@ import Button from '../UI/Button/Button';
 import * as actions from '../../store/actions';
 
 const Header = (props) => {
-  const [username, setUsername] = useState(null);
   const userId = props.userId;
+  const onFetchUsername = props.onFetchUsername;
 
   let usernameBlock = (
     <span className={classes.Username}>
-      <strong>@{username}</strong>
+      <strong>@{props.username}</strong>
     </span>
   );
 
-  const fetchUsername = useCallback(() => {
-    axios.get(`https://pigeon-e9149.firebaseio.com/users/${userId}.json`)
-      .then(res => {
-        setUsername(res.data.username);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [userId]);
-
   useEffect(() => {
-    fetchUsername();
-  }, [fetchUsername]);  
+    onFetchUsername(userId);
+  }, [onFetchUsername, userId]);  
 
   return (
     <div className={classes.Header}>
@@ -40,13 +30,15 @@ const Header = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userId
+    userId: state.auth.userId,
+    username: state.auth.username
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLogout: () => dispatch(actions.logout())
+    onLogout: () => dispatch(actions.logout()),
+    onFetchUsername: (userId) => dispatch(actions.fetchUsername(userId))
   }
 }
 

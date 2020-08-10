@@ -6,8 +6,13 @@ import { Switch, Route } from 'react-router-dom';
 import HomeContent from './HomeContent/HomeContent';
 import Auth from '../Auth/Auth';
 import Title from '../UI/Text/Title/Title';
+import Loading from '../UI/Loading/Loading';
 
 const Home = (props) => {
+  if (props.loading) {
+    return <Loading fullscreen />;
+  }
+
   return (
     <div className={classes.Home}>
       <Title>Start messaging now.</Title>
@@ -22,8 +27,8 @@ const Home = (props) => {
 
 const mapStateToProps = state => {
   return {
-    loading: state.loading,
-    error: state.error
+    loading: state.auth.loading,
+    error: state.auth.error
   }
 }
 

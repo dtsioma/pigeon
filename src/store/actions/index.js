@@ -2,17 +2,30 @@ export {
   login,
   loginInit,
   loginSuccess,
-  loginFail,
+  loginFailed,
   signup,
   signupInit,
   signupSuccess,
-  signupFail,
+  signupFailed,
   autoLogin,
   logout,
-  logoutSuccess
+  logoutSuccess,
+  fetchUsername,
+  setUsername
 } from './auth';
 
 export {
   showErrorModal,
   clearError
 } from './modal';
+
+export {
+  fetchConversations,
+  fetchConversationsInit,
+  fetchConversationsSuccess,
+  fetchConversationsFailed
+} from './conversations';
+
+export {
+  setConvo
+} from './convo';

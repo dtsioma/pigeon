@@ -6,6 +6,7 @@ import { showErrorMessage } from '../../shared/utility';
 
 const withErrorHandler = (WrappedComponent) => {
   return props => {
+    console.log(props);
     props.error && console.log(props.error.response);
 
     return (

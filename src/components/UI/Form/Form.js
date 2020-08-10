@@ -97,10 +97,10 @@ const Form = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.loading,
-    error: state.error,
-    isLoggedIn: state.userId !== null,
-    userId: state.userId
+    loading: state.auth.loading,
+    error: state.auth.error,
+    isLoggedIn: state.auth.userId !== null,
+    userId: state.auth.userId
   }
 }
 

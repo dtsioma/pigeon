@@ -22,7 +22,7 @@ export const loginSuccess = (id, token) => {
   }
 }
 
-export const loginFail = (error) => {
+export const loginFailed = (error) => {
   return {
     type: actionTypes.SET_ERROR,
     error: error
@@ -52,7 +52,7 @@ export const signupSuccess = (id, token) => {
   }
 }
 
-export const signupFail = (error) => {
+export const signupFailed = (error) => {
   return {
     type: actionTypes.SET_ERROR,
     error: error
@@ -76,5 +76,19 @@ export const logoutSuccess = () => {
     type: actionTypes.SET_USERDATA,
     userId: null,
     token: null
+  }
+}
+
+export const fetchUsername = (userId) => {
+  return {
+    type: actionTypes.FETCH_USERNAME,
+    userId: userId
+  }
+}
+
+export const setUsername = (username) => {
+  return {
+    type: actionTypes.SET_USERNAME,
+    username: username
   }
 }

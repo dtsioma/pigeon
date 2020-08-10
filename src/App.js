@@ -25,8 +25,7 @@ const App = (props) => {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: state.userId !== null,
-    // userId: state.userId
+    isLoggedIn: state.auth.userId !== null,
   }
 }
 

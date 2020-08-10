@@ -1,76 +1,28 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import classes from './Conversations.module.css';
 import ConversationsNotFound from './ConversationsNotFound/ConversationsNotFound';
 import ConversationsList from './ConversationsList/ConversationsList';
 import Subtitle from '../UI/Text/Subtitle/Subtitle';
+import Loading from '../UI/Loading/Loading';
 
-const Conversations = (props) => { 
-  const [convos, setConvos] = useState([]);
-  const userId = props.userId;
-
-  const fetchConvos = () => {
-    axios.get(`https://pigeon-e9149.firebaseio.com/conversations.json`)
-      .then(res => {
-        const fetchedConvos = [];
-        for (let convo in res.data) {
-          if (res.data[convo].users.includes(userId)) {
-            fetchedConvos.push({
-              ...res.data[convo],
-              id: convo
-            });
-          }
-        }
-        setConvos(fetchedConvos);
-      })
-      .catch(err => { console.log(err.response); });
-  }
-
-  const addConvo = () => {
-    axios.post('https://pigeon-e9149.firebaseio.com/conversations.json', {
-      users: [
-        '7C5B4vzLUKgwfBF0IVHeIhI9QDK2',
-        'NvwEKG7tC3QeuE6aOnboRlU99Ht1'
-      ],
-      messages: [
-        {
-          sender: '7C5B4vzLUKgwfBF0IVHeIhI9QDK2',
-          text: 'Hi, my name is Daniil',
-          date: new Date(new Date().getTime() - 1000)
-        },
-        {
-          sender: 'NvwEKG7tC3QeuE6aOnboRlU99Ht1',
-          text: 'Hello, that\'s my response',
-          date: new Date()
-        }
-      ]
-    })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err.response);
-      })
-  }
-
-  useEffect(() => {
-    // addConvo();
-    fetchConvos();
-  }, []);
-
+const Conversations = (props) => {
   let convosBlock = (
     <ConversationsNotFound />
   );
 
-  if (convos.length !== 0) {
+  if (props.conversations.length !== 0) {
     convosBlock = (
       <div className={classes.Wrapper}>
         <Subtitle centered>Conversations</Subtitle>
-        <ConversationsList conversations={convos} />
+        <ConversationsList />
       </div>
     )
+  }
+
+  if (props.loading) {
+    return <Loading height="calc(100vh - 87px)" />;
   }
 
   return (
@@ -82,14 +34,9 @@ const Conversations = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userId
+    conversations: state.conversations.convos,
+    loading: state.conversations.loading
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Conversations);
+export default connect(mapStateToProps)(Conversations);
