@@ -7,7 +7,7 @@ const ConvoMessage = (props) => {
   const convoMessageClasses = [classes.ConvoMessage, props.sender === props.userId ? classes.FromMe : classes.ToMe];
 
   return (
-    <div className={convoMessageClasses.join(' ')} style={{marginTop: props.marginTop ? '20px' : 0}}>
+    <div className={convoMessageClasses.join(' ')}>
       {props.text}
     </div>
   );

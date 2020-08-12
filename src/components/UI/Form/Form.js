@@ -5,7 +5,6 @@ import { checkValidity } from '../../../shared/utility';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 
 import classes from './Form.module.css';
-// import Input from './Input/Input';
 import Button from '../Button/Button';
 
 const Form = (props) => {

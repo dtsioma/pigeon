@@ -3,6 +3,7 @@ import { all, takeEvery } from 'redux-saga/effects';
 import * as actionTypes from '../actions/actionTypes';
 import { loginSaga, autoLoginSaga, logoutSaga, signupSaga, fetchUsernameSaga } from './auth';
 import { fetchConversationsSaga } from './conversations';
+import { sendMessageSaga } from './convo';
 
 export function* watchAuth() {
   yield all([
@@ -18,4 +19,10 @@ export function* watchConversations() {
   yield all([
     takeEvery(actionTypes.FETCH_CONVERSATIONS, fetchConversationsSaga)
   ]);
+}
+
+export function* watchConvo() {
+  yield all([
+    takeEvery(actionTypes.SEND_MESSAGE, sendMessageSaga)
+  ])
 }

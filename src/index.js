@@ -4,7 +4,7 @@ import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import { watchAuth, watchConversations } from './store/sagas';
+import { watchAuth, watchConversations, watchConvo } from './store/sagas';
 import { createBrowserHistory } from 'history';
 
 import authReducer from './store/reducers/auth';
@@ -35,6 +35,7 @@ export const browserHistory = createBrowserHistory();
 
 sagaMiddleware.run(watchAuth);
 sagaMiddleware.run(watchConversations);
+sagaMiddleware.run(watchConvo);
 
 ReactDOM.render(
   <Provider store={store}>

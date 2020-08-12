@@ -5,21 +5,19 @@ import classes from './ConvoDialog.module.css';
 import ConvoMessage from '../ConvoMessage/ConvoMessage';
 
 const ConvoDialog = (props) => {
-  // console.log(props.conversation);
-
-  let convoMessages = null;
+  let convoMessages = [];
 
   if (props.conversation) {
-    convoMessages = props.conversation.messages.map((msg, index) => (
-      <ConvoMessage
-        date={msg.date}
-        sender={msg.sender}
-        text={msg.text} 
-        key={msg.date}
-        marginTop={index !== 0} />
-    ));
-
-    console.log(convoMessages);
+    for (let msgId in props.conversation.messages) {
+      const message = props.conversation.messages[msgId];
+      convoMessages.push(
+        <ConvoMessage
+          date={message.date}
+          sender={message.sender}
+          text={message.text} 
+          key={msgId} />
+      );
+    }
   }
 
 

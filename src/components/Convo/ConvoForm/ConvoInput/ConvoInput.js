@@ -1,14 +1,15 @@
 import React from 'react';
 
-import classes from './ConvoInputField.module.css';
+import classes from './ConvoInput.module.css';
 
-const ConvoInputField = (props) => {
+const ConvoInput = (props) => {
   return (
     <input 
+      value={props.message}
       className={classes.ConvoInputField} 
       onChange={props.changed}
       placeholder="Say something..." />
   );
 };
 
-export default ConvoInputField;
+export default ConvoInput;

@@ -11,6 +11,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         activeConvo: action.convo
       }
+    case actionTypes.ADD_MESSAGE: {
+      return {
+        ...state,
+        activeConvo: {
+          ...state.activeConvo,
+          messages: {
+            ...state.activeConvo.messages,
+            [action.messageId]: action.message
+          }
+        }
+      }
+    }
     default: return state;
   }
 }

@@ -2,31 +2,28 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import classes from './Convo.module.css';
-import ConvoInput from './ConvoInput/ConvoInput';
+import ConvoForm from './ConvoForm/ConvoForm';
 import ConvoDialog from './ConvoDialog/ConvoDialog';
 import * as actions from '../../store/actions';
 
 const Convo = (props) => {
   const convos = props.convos;
   const onSetConvo = props.onSetConvo;
-
-  const fetchConvo = () => {
-    for (let convo in convos) {
-      if (convos[convo].usernames.includes(props.match.params.username)) {
-        return convos[convo];
-      }
-    }
-    return null;
-  }
+  const username = props.match.params.username;
 
   useEffect(() => {
-    onSetConvo(fetchConvo());
-  }, [convos, onSetConvo]);
+    for (let convo in convos) {
+      if (convos[convo].usernames.includes(username)) {
+        onSetConvo(convos[convo]); return;
+      }
+    }
+    onSetConvo(null); return;
+  }, [onSetConvo, convos, username]);
 
   return (
     <div className={classes.Convo}>
       <ConvoDialog />
-      <ConvoInput />
+      <ConvoForm />
     </div>
   );
 };

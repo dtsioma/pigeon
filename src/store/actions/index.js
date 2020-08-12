@@ -27,5 +27,8 @@ export {
 } from './conversations';
 
 export {
-  setConvo
+  setConvo,
+  addMessage,
+  sendMessage,
+  sendMessageInit
 } from './convo';
